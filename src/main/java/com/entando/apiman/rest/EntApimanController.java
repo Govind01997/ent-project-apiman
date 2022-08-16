@@ -23,7 +23,7 @@ public class EntApimanController {
 
 	@GetMapping
 	// @RolesAllowed("admin")
-	// @Scheduled(fixedDelay = 10000)
+	 @Scheduled(fixedDelay = 10000)
 
 	public List<Entapiman> GetAllApi() {
 		System.out.println("Fixed rate task - " + System.currentTimeMillis() / 1000);
