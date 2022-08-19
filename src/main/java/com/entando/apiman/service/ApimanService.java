@@ -1,13 +1,13 @@
-package com.entando.apiman.service;
+// package com.entando.apiman.service;
 
-import java.util.List;
+// import java.util.List;
 
-import com.entando.apiman.entity.Entapiman;
+// import com.entando.apiman.entity.Entapiman;
 
 
-public interface ApimanService {
+// public interface ApimanService {
 
 	
-	List<Entapiman> findAllApiman();
-	void podlist();
-}
+// 	List<Entapiman> findAllApiman();
+// 	void podlist();
+// }

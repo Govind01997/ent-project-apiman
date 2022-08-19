@@ -1,43 +1,35 @@
 package com.entando.apiman.rest;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.entando.apiman.entity.Entapiman;
-import com.entando.apiman.service.ApimanService;
+import com.entando.apiman.k8sService.InternalServiceFetcher;
+
+import io.kubernetes.client.openapi.ApiException;
 
 @RestController
-@RequestMapping("/api/apiman")
-
+@RequestMapping("/fetcher")
 public class EntApimanController {
 
-	private final ApimanService apimanService;
 
-	public EntApimanController(ApimanService apimanService) {
-		this.apimanService = apimanService;
-	}
+	@Autowired
+	InternalServiceFetcher iFetcher;
 
-	@GetMapping
-	// @RolesAllowed("admin")
-	// @Scheduled(fixedDelay = 10000)
 
-	public List<Entapiman> GetAllApi() {
-		System.out.println("Fixed rate task - " + System.currentTimeMillis() / 1000);
-		return apimanService.findAllApiman();
 
-	}
+	@GetMapping("/")
+	public String InternalData() throws FileNotFoundException, IOException, ApiException {
 
-	@Scheduled(fixedDelay = 10000)
 
-	@GetMapping("/pod")
-	public void getAllPod() {
-		System.out.println("calling pods");
-		apimanService.podlist();
-
+		return iFetcher.fetchService();
+		
 	}
 
 }

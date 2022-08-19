@@ -12,7 +12,6 @@ public class EntapimanApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(EntapimanApplication.class, args);
-
 	}
 
 }

@@ -1,21 +1,21 @@
-package com.entando.apiman.entity;
+// package com.entando.apiman.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+// import javax.persistence.Column;
+// import javax.persistence.Entity;
+// import javax.persistence.Id;
+// import javax.persistence.Table;
 
-import lombok.Data;
+// import lombok.Data;
 
-@Data
-@Entity
-@Table(name = "Apiman")
-public class Entapiman {
+// @Data
+// @Entity
+// @Table(name = "Apiman")
+// public class Entapiman {
 
-	@Id
-	@Column(name = "api_id")
-	private int apiId;
+// 	@Id
+// 	@Column(name = "api_id")
+// 	private int apiId;
 
-	private String apiName;
+// 	private String apiName;
 
-}
+// }
