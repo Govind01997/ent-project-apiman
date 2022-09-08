@@ -1,7 +1,9 @@
+/*
 package com.entando.apiman.k8sService;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +21,16 @@ public class InternalServiceFetcher {
 	@Autowired
 	K8ServiceConnector kConnector;
 
-	List<String> ClusterIP;
+	List<String> ClusterIP1;
 
 	String ContextPath;
 
 	Integer Port;
 
-	public String fetchService() throws FileNotFoundException, IOException, ApiException {
+	public List<String> fetchService() throws FileNotFoundException, IOException, ApiException {
+	
+		List<List<String>> clusterIP2 = new ArrayList<>();
+        List<String> address=new ArrayList<>();
 
 		CoreV1Api api = kConnector.getV1API();
 
@@ -33,20 +38,27 @@ public class InternalServiceFetcher {
 		String ls = "entando.org/deployment=pn-baf96d56-1f31cbd9-akhileshprajapatinv-ent-project-template";
 		String fs = "status.phase=Running";
 		V1ServiceList list = api.listNamespacedService(ns, "", null, null, null, null, null, null, null, null, null);
-
+         System.out.println("123456"+list);
 		list.getItems().forEach(e -> {
 			try {
 				V1PodList ll = api.listNamespacedPod(ns, "pretty", null, null, null, null, null, null, null, null,
 						null);
-
-				ClusterIP = e.getSpec().getClusterIPs();
-				// System.out.println(ClusterIP);
-
+				ClusterIP1=e.getSpec().getClusterIPs() ;
+                   try {
+				
+                	   clusterIP2.add(ClusterIP1);
+				       System.out.println(clusterIP2);
+				
+				} 
+                   catch (Exception g) {
+	                   System.out.println("no");
+}
 				e.getSpec().getPorts().stream().forEach(p -> {
 					Port = p.getPort();
+
 				});
 
-				System.out.println(ClusterIP + ":" + Port);
+				System.out.println(ClusterIP1 + ":" + Port);
 
 //				for (V1Pod item : ll.getItems()) {
 //					ContextPath = item.getMetadata().getName();
@@ -61,15 +73,17 @@ public class InternalServiceFetcher {
 //                            if(ge.getName().equals("SERVER_SERVLET_CONTEXT_PATH"))
 //                            {
 								ContextPath = ge.getValue();
-
-								System.out.println(ClusterIP + ":" + Port + "/" + ContextPath);
+                                 //String address;
+                                 address.add(ClusterIP1 + ":" + Port + "/" + ContextPath );
+								 //System.out.println(address);
 //                            }
 
 							});
 						});
 						;
 					});
-				} catch (Exception e2) {
+				} 
+				catch (Exception e2) {
 					System.out.println("no value");
 				}
 
@@ -80,7 +94,8 @@ public class InternalServiceFetcher {
 			;
 		});
 
-		return ClusterIP + ":" + Port + ContextPath;
+		return address;
 
 	}
 }
+*/

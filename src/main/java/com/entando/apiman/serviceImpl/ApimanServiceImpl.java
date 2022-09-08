@@ -1,43 +1,45 @@
-// package com.entando.apiman.serviceImpl;
 
-// import java.io.IOException;
-// import java.util.List;
+/*
+package com.entando.apiman.serviceImpl;
 
-// import org.springframework.stereotype.Service;
+import java.io.IOException;
 
-// import com.entando.apiman.entity.Entapiman;
-// import com.entando.apiman.repositories.ApimanRepository;
-// import com.entando.apiman.service.ApimanService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-// import io.kubernetes.client.openapi.ApiException;
-// import io.kubernetes.client.proto.V1.PodList;
+import com.entando.apiman.entity.EntServiceDetail;
+import com.entando.apiman.k8sService.InternalServiceFetcher;
+import com.entando.apiman.repositories.Repo;
+import com.entando.apiman.service.EntApimanService;
 
-// @Service
-// public class ApimanServiceImpl implements ApimanService {
+import io.kubernetes.client.openapi.ApiException;
 
-// 	private final ApimanRepository apimanRepository;
+@Service
+public class ApimanServiceImpl implements EntApimanService {
 
-// 	public ApimanServiceImpl(ApimanRepository apimanRepository) {
-// 		this.apimanRepository = apimanRepository;
-// 	}
+	@Autowired
+	private Repo repo;
+	@Autowired
+	private InternalServiceFetcher fetch;
+	
+	@Override
+	
+	public  void saveUrl(  ) {
+		try {
+			for(String f1:fetch.fetchService())
+			{
+				EntServiceDetail obj=new EntServiceDetail();
+				obj.setUrl(f1);
+				repo.save(obj);
+			}
+			
+			
+		} catch (IOException | ApiException e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
 
-// 	@Override
-// 	public List<Entapiman> findAllApiman() {
-// 		return apimanRepository.findAll();
-// 		// return null;
-// 	}
-
-// 	@Override
-// 	public void podlist() {
-// 		PodList p = new PodList();
-
-// 		try {
-// 			p.podList();
-// 		} catch (IOException | ApiException e) {
-// 			// TODO Auto-generated catch block
-// 			e.printStackTrace();
-// 		}
-
-// 	}
-
-// }
+}
+*/

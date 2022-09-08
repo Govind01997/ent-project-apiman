@@ -1,7 +1,10 @@
+/*
+
 package com.entando.apiman.k8sService;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +14,6 @@ import io.kubernetes.client.openapi.ApiException;
 import io.kubernetes.client.openapi.apis.CoreV1Api;
 import io.kubernetes.client.openapi.models.V1PodList;
 import io.kubernetes.client.openapi.models.V1ServiceList;
-
 @Component
 public class ExternalServiceFetcher {
 
@@ -23,12 +25,16 @@ public class ExternalServiceFetcher {
 	String ContextPath;
 
 	Integer Port;
+	String addres;
+	List<String> Address;
 
-	public String xfetchService() throws FileNotFoundException, IOException, ApiException {
+	
+	
+	public List<String> xfetchService() throws FileNotFoundException, IOException, ApiException {
 
 		CoreV1Api api = kConnector.getV1API();
 
-		String ns = "default";
+		String ns = "entando";
 		String ls = "entando.org/deployment=pn-baf96d56-1f31cbd9-akhileshprajapatinv-ent-project-template";
 		V1ServiceList list = api.listNamespacedService(ns, "", null, null, null, null, null, null, null, null, null);
 
@@ -60,7 +66,10 @@ public class ExternalServiceFetcher {
 //                            {
 								ContextPath = ge.getValue();
 
-								System.out.println(ClusterIP + ":" + Port + "/" + ContextPath);
+								//System.out.println(ClusterIP + ":" + Port + "/" + ContextPath);
+								addres=ClusterIP + ":" + Port + "/" + ContextPath;
+								Address.add(addres);
+								
 //                            }
 
 							});
@@ -77,8 +86,10 @@ public class ExternalServiceFetcher {
 			}
 			;
 		});
-
-		return ClusterIP + ":" + Port + ContextPath;
+        //System.out.println(Address);
+		return Address;
 
 	}
 }
+
+*/

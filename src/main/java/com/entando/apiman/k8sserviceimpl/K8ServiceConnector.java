@@ -1,4 +1,4 @@
-package com.entando.apiman.k8sService;
+package com.entando.apiman.k8sserviceimpl;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -11,8 +11,6 @@ import io.kubernetes.client.openapi.Configuration;
 import io.kubernetes.client.openapi.apis.CoreV1Api;
 import io.kubernetes.client.util.ClientBuilder;
 import io.kubernetes.client.util.KubeConfig;
-
-
 
 @Component
 public class K8ServiceConnector {
@@ -35,3 +33,5 @@ public class K8ServiceConnector {
     }
     
 }
+
+
